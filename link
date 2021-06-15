@@ -1,0 +1,19 @@
+_launchURL() async {
+  if (Platform.isIOS) {
+    if (await canLaunch('youtube://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw')) {
+      await launch('youtube://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw', forceSafariVC: false);
+    } else {
+      if (await canLaunch('https://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw')) {
+        await launch('https://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw');
+      } else {
+        throw 'Could not launch https://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw';
+      }
+    }
+  } else {
+    const url = 'https://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+}
